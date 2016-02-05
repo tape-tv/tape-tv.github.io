@@ -8,7 +8,7 @@
 # Site settings
 title: tape.tv engineering
 email: tech@tape.tv
-description: > A technical blog run by the engineers at tape.tv
+description: "A technical blog run by the engineers at tape.tv"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://tape-tv.github.io" # the base hostname & protocol for your site
 twitter_username: tape_tv
