@@ -26,13 +26,16 @@ With this gem you can normalise music ids and make sensible comparisons on them.
     isrc.year        #=> '98'
     isrc.designation #=> '00212'
 
-... and return json representations of them ... 
+... and support generating json from the objects ... 
 
     isrc = MusicIds::ISRC.parse('FRZ039800212')
     grid = MusicIds::GRid.parse('A12425GABC1234002M')
 
     isrc.as_json #=> 'FRZ039800212'
+    grid.as_json #=> 'A12425GABC1234002M'
 
+    JSON.generate({isrc: isrc, grid: grid}) #=> "{\"isrc\":\"FRZ039800212\",\"grid\":\"A12425GABC1234002M\"}"
+ 
 For an overview of all features of the Music IDs gem see the [readme](http://www.github.io/tapetv/music_ids, "Music IDs")
 
 
