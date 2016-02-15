@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "Music IDs"
+date:   2016-02-15 12:59:55 +0100
+categories: ruby
+---
+
+At tape.tv we automatically ingest a lot of video content from many labels from majors to independants. This content is delivered as video material along with corresponding
+metadata usually in the DDEX (or equivalent) xml format. Part of this format is an identifier that uniquely identifies the musical performance. These IDs in the music
+industry parlance are either a GRid (Global Release Identifier) or ISRC (International Standard Recording Code).
+
+Every so often, the formatting of these ids differs between deliveries which makes comparing and processing these ids somewhat error prone. Enter the Music IDs gem authored
+by our very own [Matthew Patterson](http://www.github.io/fidothe)
+
+With this gem you can normalise music ids and make sensible comparisons on them...
+
+    isrc = MusicIds::ISRC.parse('FRZ039800212')
+    other = ISRC.parse('FR-Z03-98-00212')
+    isrc == other #=> true
+
+... break them down into their constituant parts ... 
+
+    isrc = MusicIds::ISRC.parse('FRZ039800212')
+    isrc.country     #=> 'FR'
+    isrc.registrant  #=> 'Z03'
+    isrc.year        #=> '98'
+    isrc.designation #=> '00212'
+
+... and return json representations of them ... 
+
+    isrc = MusicIds::ISRC.parse('FRZ039800212')
+    grid = MusicIds::GRid.parse('A12425GABC1234002M')
+
+    isrc.as_json #=> 'FRZ039800212'
+
+For an overview of all features of the Music IDs gem see the [readme](http://www.github.io/tapetv/music_ids, "Music IDs")
+
+
