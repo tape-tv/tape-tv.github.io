@@ -9,7 +9,7 @@ categories: ruby
 
 At tape.tv we automatically ingest a lot of video content from many labels from majors to independants. This content is delivered as video material along with corresponding metadata usually in the DDEX (or equivalent) xml format. Part of this format is an identifier that uniquely identifies the musical performance. These IDs in the music industry parlance are either a GRid (Global Release Identifier) or ISRC (International Standard Recording Code).
 
-Every so often, the formatting of these ids differs between deliveries which makes comparing and processing these ids somewhat error prone. Enter the Music IDs gem authored by our very own [Matthew Patterson](http://www.github.io/fidothe)!
+Every so often, the formatting of these ids differs between deliveries which makes comparing and processing these ids somewhat error prone. Enter the Music IDs gem authored by our very own [Matthew Patterson](https://github.com/fidothe)!
 
 With this gem you can normalise music ids and make sensible comparisons on them...
 
@@ -35,6 +35,6 @@ With this gem you can normalise music ids and make sensible comparisons on them.
 
     JSON.generate({isrc: isrc, grid: grid}) #=> "{\"isrc\":\"FRZ039800212\",\"grid\":\"A12425GABC1234002M\"}"
  
-For an overview of all features of the Music IDs gem see the [readme](http://www.github.io/tapetv/music_ids, "Music IDs")
+For an overview of all features of the Music IDs gem see the [README](https://github.com/tape-tv/music_ids/blob/master/README.md "Music IDs").
 
-
+The tape.tv dev team ...
