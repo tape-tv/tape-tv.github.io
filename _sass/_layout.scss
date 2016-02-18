@@ -173,9 +173,39 @@
     margin-bottom: 0;
   }
 
-  &--orange &__title .post-link{
+  &--swift &__title .post-link{
     color: #D47B3F;
     border-color: #D47B3F;
+  }
+
+  &--ruby &__title .post-link{
+    color: #D43B50;
+    border-color: #D43B50;
+  }
+
+  &--javascript &__title .post-link{
+    color: #BF9E37;
+    border-color: #BF9E37;
+  }
+
+  &--ops &__title .post-link{
+    color: #5085D9;
+    border-color: #5085D9;
+  }
+
+  &--go &__title .post-link{
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+
+  &--purple &__title .post-link{
+    color: #BB6BC7;
+    border-color: #BB6BC7;
+  }
+
+  &--purple &__title .post-link{
+    color: #CBD2DE;
+    border-color: #CBD2DE;
   }
 
   &:before {

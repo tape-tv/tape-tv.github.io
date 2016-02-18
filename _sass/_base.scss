@@ -23,6 +23,10 @@ body {
     -o-font-feature-settings: "kern" 1;
     font-feature-settings: "kern" 1;
     font-kerning: normal;
+
+    @media screen  and (min-device-width: 320px) {
+      margin: 0 10px;
+    }
 }
 
 
@@ -94,12 +98,7 @@ a {
     color: $brand-color;
     text-decoration: none;
 
-    &:visited {
-        color: darken($brand-color, 15%);
-    }
-
     &:hover {
-        color: $text-color;
         text-decoration: underline;
     }
 }
