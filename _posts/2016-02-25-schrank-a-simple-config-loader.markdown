@@ -14,22 +14,23 @@ to store access credentials and other settings in a way that:
 
 Our solution to that problem is [Schrank][schrank].
 
-It's a tiny gem that loads configuration from any YAML file. You can
+It's a tiny gem that loads configuration from a YAML file. You can
 provide a hash of defaults in case the file doesn't exist and, in development
 only, the defaults are merged with the YAML.
 
-This sounds strange at first, we know. But we like it this way because *there
+The latter sounds strange at first, we know. But we like it this way because *there
 are two types of configuration – things you are happy to have in version
 control and things you aren't*.
 
-In production and staging, our config is managed via Chef. We have data bags
-per environment and we don't want to merge them with the defaults. In
+In production and staging, our config is managed via Chef. We have a data bag
+per environment which we don't want to merge with the defaults. In
 development, we have our config split in two.
-Values that are safe to put into version control, such as access tokens
-that all the developers share, are written in as defaults. Other values,
+
+Values that are safe to put into version control, such as tokens
+shared by the whole team, are written in as defaults. Other values,
 such as personal AWS credentials, are read from the development YAML file.
 
-Here's what our usage tend to look like:
+Here's what our usage tends to look like:
 
 {% highlight ruby %}
 $config = Schrank.load(Rails.root.join("config/#{Rails.env}.yml")) do
