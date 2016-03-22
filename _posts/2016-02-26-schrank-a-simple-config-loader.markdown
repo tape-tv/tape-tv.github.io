@@ -5,6 +5,8 @@ date: 2016-02-26 17:00:00 +0100
 categories: ruby
 ---
 
+![Schrank](/images/schrank.png)
+
 Whenever we set up a new Ruby application, we face the problem of how
 to store access credentials and other settings in a way that:
 
