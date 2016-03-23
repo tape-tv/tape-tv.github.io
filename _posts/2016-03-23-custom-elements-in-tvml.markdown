@@ -39,6 +39,8 @@ In the project we will create two new elements:
  - `<rainbowText>` will render the text it contains as a rainbow
  - `<rainbowProgress>` will render a progress bar in the colors of a rainbow
 
+![Image of the result](http://tape-tv.github.io/images/custom_tvml_components_screenshot.png)
+
 ### Creating `rainbowText`
 The `rainbowText` element will render the characters of its contained text in different colors.
 
