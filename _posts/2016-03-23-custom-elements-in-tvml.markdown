@@ -106,7 +106,7 @@ TVInterfaceFactory.sharedInterfaceFactory().extendedInterfaceCreator = Interface
 If you put a breakpoint on the `return nil` line and run the app you will see that the function is being called for every element in the TVML DOM.
 
 #### Registering a custom element
-Now let’s register our own element! If your take a look at the TVMLKit [https://developer.apple.com/library/tvos/documentation/TVMLKit/Reference/TVMLKit_Collection/index.html#//apple_ref/doc/uid/TP40016429](reference) again you will see that there are three classes to choose from:
+Now let’s register our own element! If your take a look at the TVMLKit [reference](https://developer.apple.com/library/tvos/documentation/TVMLKit/Reference/TVMLKit_Collection/index.html#//apple_ref/doc/uid/TP40016429) again you will see that there are three classes to choose from:
 
  - `TVViewElement`
 	 - `TVImageElement`
