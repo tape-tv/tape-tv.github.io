@@ -5,7 +5,7 @@ date:   2016-03-23 20:31:20 +0100
 categories: swift
 ---
 
-If you are not familiar with TVML it’s a markup language created for apps running on the new Apple TV which allows you to describe native interfaces similar to HTML without writing a single line of Swift.
+If you are not familiar with TVML, it’s a markup language created for apps running on the new Apple TV which allows you to describe native interfaces similar to HTML without writing a single line of Swift.
 
 TVML documents can also be fetched from a server making them ideal for “browsing interfaces” where the content changes frequently and the interface does not need to be highly customized.
 
