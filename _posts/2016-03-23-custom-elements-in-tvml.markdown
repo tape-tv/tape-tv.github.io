@@ -126,7 +126,7 @@ TVElementFactory.registerViewElementClass(TVTextElement.self, forElementName: "r
 
 This tells TVMLKit to register a new DOM element called “rainbowText” with a `TVTextElement` class. That mean that you can now write
 
-{% highlight swift %}
+{% highlight html %}
 <rainbowText>Hello World!</rainbowText>
 {% endhighlight %}
 
