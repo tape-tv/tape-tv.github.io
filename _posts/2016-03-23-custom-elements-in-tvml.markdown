@@ -35,6 +35,7 @@ You will access this class in your AppDelegate to register your custom elements 
 Let’s connect these parts by building a little sample project which you can download [here](https://github.com/tape-tv/Custom-TVML-Views).
 
 In the project we will create two new elements:
+
  - `<rainbowText>` will render the text it contains as a rainbow
  - `<rainbowProgress>` will render a progress bar in the colors of a rainbow
 
