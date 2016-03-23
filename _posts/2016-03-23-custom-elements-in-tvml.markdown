@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Custom Elements in TVML"
+date:   2016-03-23 20:31:20 +0100
+categories: swift
+---
+
 # Custom Elements in TVML
 If you are not familiar with TVML it’s a markup language created for apps running on the new Apple TV which allows you to describe native interfaces similar to HTML without writing a single line of Swift.
 
@@ -40,7 +47,7 @@ The first thing we need to build is a factory. As stated earlier we will use thi
 
 Start by adding a new class that extends from `TVInterfaceFactory` like so:
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 import TVMLKit
@@ -48,11 +55,11 @@ import TVMLKit
 class InterfaceFactory: TVInterfaceFactory {
 
 }
-```
+{% endhighlight %}
 
 Since TVInterfaceFactory only accepts a single `extendedInterfaceCreator` we make our class a singleton to avoid confusion.
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 import TVMLKit
@@ -60,7 +67,7 @@ import TVMLKit
 class InterfaceFactory: TVInterfaceFactory {
 	static var sharedExtendedInterfaceFactory = InterfaceFactory()
 }
-```
+{% endhighlight %}
 
 We also want to override the `viewForElement` function to be able to return our own views.
 
@@ -72,7 +79,7 @@ This method will be called for every element in the current TVML Document. Since
 
 *Note: Technically, you could also return nil if your element does not display a view to the user (like a background audio element for example)*
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 import TVMLKit
@@ -84,17 +91,17 @@ class InterfaceFactory: TVInterfaceFactory {
 		return nil
 	}
 }
-```
+{% endhighlight %}
 
 Now that we have created our factory, let’s register it in the AppDelegate.
 
 In your `application:didFinishLaunchingWithOptions:` method stick this right before the return:
 
-```
+{% highlight swift %}
 // AppDelegate.swift
 
 TVInterfaceFactory.sharedInterfaceFactory().extendedInterfaceCreator = InterfaceFactory.sharedExtendedInterfaceFactory
-```
+{% endhighlight %}
 
 If you put a breakpoint on the `return nil` line and run the app you will see that the function is being called for every element in the TVML DOM.
 
@@ -111,17 +118,17 @@ In this simple case `TVTextElement` provides everything we need (access to the t
 
 Go back to your AppDelegate and add this line right above the `extendedInterfaceCreator` one:
 
-```
+{% highlight swift %}
 // AppDelegate.swift
 
 TVElementFactory.registerViewElementClass(TVTextElement.self, forElementName: "rainbowText")
-```
+{% endhighlight %}
 
 This tells TVMLKit to register a new DOM element called “rainbowText” with a `TVTextElement` class. That mean that you can now write
 
-```
+{% highlight swift %}
 <rainbowText>Hello World!</rainbowText>
-```
+{% endhighlight %}
 
 in your TVML code and it will be recognized!
 
@@ -133,7 +140,7 @@ First of all you need to figure out when the view for your element is requested.
 
 For a project with around 3-10 custom elements we found that a switch case is both simple and extendable.
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 override func viewForElement(element: TVViewElement, existingView: UIView?) -> UIView? {
@@ -142,20 +149,19 @@ override func viewForElement(element: TVViewElement, existingView: UIView?) -> U
     return nil
 	}
 }
-
-```
+{% endhighlight %}
 
 Thanks to Swift’s powerful matching syntax we can filter for our element like so:
 
-```
+{% highlight swift %}
 case let element as TVTextElement where element.elementName == "rainbowText":
-```
+{% endhighlight %}
 
 That means we bind the constant `element` to a `TVTextElement` that has its `elementName` property set to `"rainbowText"`.
 
 Here is a simple implementation of a rainbow label:
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 override func viewForElement(element: TVViewElement, existingView: UIView?) -> UIView? {
@@ -186,8 +192,7 @@ override func viewForElement(element: TVViewElement, existingView: UIView?) -> U
     return nil
 	}
 }
-
-```
+{% endhighlight %}
 
 We won’t go too much into the detail of how this works. If you have questions, write a tweet to [@tape_tv_dev](https://twitter.com/tape_tv_dev)!
 
@@ -201,7 +206,7 @@ Next up we will create a more complex example.
 
 Create a new class called `RainbowProgressElement` that extends from `TVViewElement`.
 
-```
+{% highlight swift %}
 // RainbowProgressElement.swift
 
 import TVMLKit
@@ -209,36 +214,35 @@ import TVMLKit
 class RainbowProgressElement: TVViewElement {
 
 }
-
-```
+{% endhighlight %}
 
 And then register that class for the `”rainbowProgress”` element.
 
-```
+{% highlight swift %}
 // AppDelegate.swift
 
 TVElementFactory.registerViewElementClass(RainbowProgressElement.self, forElementName: "rainbowProgress")
-```
+{% endhighlight %}
 
 and add it to your TVML code
 
-```
+{% highlight html %}
 <rainbowProgress/>
-```
+{% endhighlight %}
 
 Next, go back to the `InterfaceFactory` and add a new case statement for the element
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 case let element as RainbowProgressElement:
-```
+{% endhighlight %}
 
 This time we only need to match for our class.
 
 This post won’t go into how to create the rainbow progress bar. You can find its code alongside some documentation inside the sample project. Let’s just create the view and return it:
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 case let element as RainbowProgressElement:
@@ -247,7 +251,7 @@ case let element as RainbowProgressElement:
 	rainbowProgressView.progress = 0.5
 
 	return rainbowProgressView
-```
+{% endhighlight %}
 
 #### Implementing style attributes
 
@@ -259,7 +263,7 @@ You can get the style properties from `element.style`. However, if the values ha
 
 In order to keep a strict separation of concerns, we will add an `explicitWidth` and an `explicitHeight` property to the `RainbowProgressElement` that returns and casts our value.
 
-```
+{% highlight swift %}
 //  RainbowProgressElement.swift
 
 var explicitWidth: CGFloat? {
@@ -269,64 +273,64 @@ var explicitWidth: CGFloat? {
 var explicitHeight: CGFloat? {
 	return style?.valueForStyleProperty("height") as? CGFloat
 }
-```
+{% endhighlight %}
 
 Now we can create the view’s frame using the values provided from its element. Nice!
  
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 let width = element.explicitWidth ?? 200
 let height = element.explicitHeight ?? 10
 
 let rainbowProgressView = RainbowProgress(frame: CGRect(x: 0, y: 0, width: width, height: height))
-```
+{% endhighlight %}
 
 *Note: The downside of this solution is that the default value cannot be inspected from within the TVML context (e.g. by using JavaScript or the Web Inspector). So far I have not found an approach to do this as you cannot set the `style` property yourself.*
 
 Let’s try the same thing with the `margin` property. `element.style?.margin` returns a `UIEdgeInsets` struct which we can assign to the views `layoutMargins` property.
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 if let margin = element.style?.margin {
   rainbowProgressView.layoutMargins = margin
 }
-```
+{% endhighlight %}
 
 Try it out!
 
-```
+{% highlight html %}
 <rainbowProgress style="margin: 20;"/>
-```
+{% endhighlight %}
 
 #### Implementing custom attributes
 The last thing we need is the ability to set the progress value from within TVML. Let’s get started by adding the attribute to the element.
 
-```
+{% highlight html %}
 <rainbowProgress progress="0.2" style="margin: 20;"/>
-```
+{% endhighlight %}
 
 Now all we need is a way to access that value.
 The value is availible in the `attributes` dictionary of the `element`.
 To make things a bit cleaner, we can add a value to our `RainbowProgressElement` class that automatically casts the value and returns an optional holding the value or `nil` if the cast failed.
 
-```
+{% highlight swift %}
 // RainbowProgressElement.swift
 
 var progress: Float? {
   guard let progress = attributes?["progress"] else { return nil }
   return Float(progress)
 }
-```
+{% endhighlight %}
 
 Back in our `InterfaceFactory` we set the value
 
-```
+{% highlight swift %}
 // InterfaceFactory.swift
 
 rainbowProgressView.progress = element.progress ?? 0.0
-```
+{% endhighlight %}
 
 Et voilà! You have created your first real custom component.
 
