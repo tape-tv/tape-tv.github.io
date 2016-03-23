@@ -136,6 +136,7 @@ code {
     background-color: darken($background-color, 5%);
     padding: 2px 5px;
     display: inline;
+    word-wrap: break-word;
 }
 
 pre {
